@@ -1,11 +1,11 @@
 import React from 'react';
-import Rocket from '../icons/Rocket';
+import RocketChallenge from '../icons/RocketChallenge';
 import NoteBook from '../icons/NoteBook';
 
 export default function Layout() {
   return (
     <>
-      <div className="m-5">
+      <div>
         <div className="flex items-center justify-between p-2">
           <div>codecamp 20_21</div>
           <div className="flex items-center justify-center gap-8">
@@ -15,7 +15,7 @@ export default function Layout() {
             </div>
 
             <div className=" flex items-center justify-center">
-              <Rocket></Rocket>
+              <RocketChallenge></RocketChallenge>
               <div>challenge</div>
             </div>
 
