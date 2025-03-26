@@ -1,22 +1,17 @@
-import { createBrowserRouter, RouterProvider } from "react-router";
-import App from "../App";
+import { createBrowserRouter, RouterProvider } from 'react-router';
+import App from '../App';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
     children: [
       {
         index: true,
-        element: (
-          <>
-            <div className="bg-red-500">Hello quiz code camp</div>
-            <button className="btn btn-primary">YES</button>
-          </>
-        ),
-      },
-    ],
-  },
+        element: <></>
+      }
+    ]
+  }
 ]);
 
 export default function AppRouter() {
