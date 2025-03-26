@@ -6,8 +6,7 @@ import Layout from './components/Layout';
 function App() {
   return (
     <>
-      <Layout></Layout>
-      <Button>Login</Button>
+      <Layout />
       <Outlet />
     </>
   );
