@@ -1,3 +1,5 @@
+
+
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 import App from "../App";
 import NavBar from "../components/NavBar";
@@ -8,13 +10,15 @@ import QuizCategoryPage from "../pages/QuizCategoryPage";
 //   { path: "/login", element: <LoginPage /> },
 //   { path: "*", element: <Navigate to="/" /> },
 // ])
+
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
     children: [
       {
         index: true,
+
         element:
           <NavBar />
       },
@@ -24,6 +28,7 @@ const router = createBrowserRouter([
       { path: "*", element: <Navigate to="/" /> },
     ],
   },
+
 ]);
 
 export default function AppRouter() {
