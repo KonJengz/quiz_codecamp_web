@@ -2,29 +2,30 @@
 
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 import App from "../App";
-import NavBar from "../components/NavBar";
+
 import LoginPage from "../pages/LoginPage";
-import QuizPage from "../pages/QuizPage";
-import QuizCategoryPage from "../pages/QuizCategoryPage";
+import QuizPage from "../pages/user/QuizPage";
+import QuizCategoryPage from "../pages/user/QuizCategoryPage";
+import DashBoard from "../pages/admin/DashBoard";
+
 // const guestRouter = createBrowserRouter([
 //   { path: "/login", element: <LoginPage /> },
 //   { path: "*", element: <Navigate to="/" /> },
 // ])
 
 const router = createBrowserRouter([
+  { path: "/login", element: <LoginPage /> },
+  { path: "/dashBoard", element: <DashBoard/>},
   {
     path: '/',
     element: <App />,
     children: [
       {
         index: true,
-
         element:
-          <NavBar />
+          <QuizCategoryPage />
       },
-      { path: "/login", element: <LoginPage /> },
-      { path: "/quizCategory", element: <QuizCategoryPage/>},
-      { path: "/quiz/:categoryId/:quizId", element: <QuizPage/>},
+      { path: "/quiz/:categoryId/:quizId", element: <QuizPage /> },
       { path: "*", element: <Navigate to="/" /> },
     ],
   },

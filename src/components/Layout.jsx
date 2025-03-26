@@ -6,7 +6,7 @@ export default function Layout() {
   return (
     <>
       <div>
-        <div className="flex items-center justify-between p-2">
+        <div className="flex items-center justify-between p-2 px-6 -mb-6">
           <div>codecamp 20_21</div>
           <div className="flex items-center justify-center gap-8">
             <div className=" flex items-center justify-center">
@@ -22,8 +22,9 @@ export default function Layout() {
             <div>logout</div>
           </div>
         </div>
-
-        <div className="h-[1px] w-full  bg-white "></div>
+        <div className="m-4 p-2">
+          <div className=" h-[1px] w-full  bg-white "></div>
+        </div>
       </div>
     </>
   );
