@@ -10,7 +10,8 @@ export default function Card({ name, finish, total, icon }) {
 
         <div className="w-full bg-gray-300 h-2 rounded-full mt-2">
           <div
-            className="h-full bg-gradient-to-r from-blue-500 to-pink-500 rounded-full"
+            // className="h-full bg-gradient-to-r from-blue-500 to-pink-500 rounded-full"
+            className="h-full bg-[#D100D7] rounded-full"
             style={{ width: `${percentage}%` }}
           ></div>
         </div>
