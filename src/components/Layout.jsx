@@ -18,7 +18,7 @@ export default function Layout() {
               <Rocket></Rocket>
               <div>challenge</div>
             </div>
-            
+
             <div>logout</div>
           </div>
         </div>
