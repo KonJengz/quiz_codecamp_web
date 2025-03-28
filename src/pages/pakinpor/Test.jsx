@@ -1,10 +1,10 @@
 import React from 'react';
-import Desktop8 from '../../template/Desktop8';
+import Desktop6 from '../../template/Desktop6';
 
 export default function Test() {
   return (
     <div>
-      <Desktop8></Desktop8>
+      <Desktop6 />
     </div>
   );
 }
