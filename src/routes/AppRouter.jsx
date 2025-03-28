@@ -13,14 +13,17 @@ import Test from '../pages/pakinpor/Test';
 // ])
 
 const router = createBrowserRouter([
+
   { path: '/login', element: <LoginPage /> },
   { path: '/dashBoard', element: <DashBoard /> },
+
   {
     path: '/',
     element: <App />,
     children: [
       {
         index: true,
+
         element: <QuizCategoryPage />
       },
       { path: '/quiz/:categoryId/:quizId', element: <QuizPage /> },
@@ -28,6 +31,7 @@ const router = createBrowserRouter([
       { path: '*', element: <Navigate to="/" /> }
     ]
   }
+
 ]);
 
 export default function AppRouter() {

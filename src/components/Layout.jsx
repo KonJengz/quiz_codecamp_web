@@ -22,6 +22,7 @@ export default function Layout() {
       <div className="flex items-center justify-between p-2 px-6">
         <div>codecamp 20_21</div>
 
+
         <div className="hidden md:flex items-center justify-center gap-8">
           <NavItem
             path={`/quiz/20/22`}
@@ -38,6 +39,7 @@ export default function Layout() {
             onClick={hdlNavigate}
           />
           <div className="cursor-pointer hover:text-red-400">logout</div>
+
         </div>
 
         <div className="md:hidden">
