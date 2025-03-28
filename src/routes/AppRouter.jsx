@@ -15,7 +15,6 @@ import DashBoard from "../pages/admin/DashBoard";
 
 const router = createBrowserRouter([
   { path: "/login", element: <LoginPage /> },
-  { path: "/dashBoard", element: <DashBoard/>},
   {
     path: '/',
     element: <App />,
@@ -23,8 +22,9 @@ const router = createBrowserRouter([
       {
         index: true,
         element:
-          <QuizCategoryPage />
+        <QuizCategoryPage />
       },
+      { path: "/dashBoard", element: <DashBoard/>},
       { path: "/quiz/:categoryId/:quizId", element: <QuizPage /> },
       { path: "*", element: <Navigate to="/" /> },
     ],
