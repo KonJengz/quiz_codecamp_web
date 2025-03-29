@@ -5,7 +5,10 @@
 
 body {
   /* background: linear-gradient(to bottom, #090016, #2d004f); */
-  background: linear-gradient(to bottom, #2d004f, #090016);
+  /* background: linear-gradient(to bottom, #2d004f, #090016); */
+  
+  background: radial-gradient(98.42% 98.42% at 50% 1.58%, #3B1959 0%, #1A0A27 72.5%);
   min-height: 100vh;
   color: white;
 }
+
