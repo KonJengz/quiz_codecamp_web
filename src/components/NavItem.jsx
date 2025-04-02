@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { useLocation } from "react-router";
 
-export default function NavItem({ path, currentPath, icon, label, onClick }) {
-  const isActive = currentPath === path;
+export default function NavItem({ path, icon: Icon, label, hdlClick }) {
+  const location = useLocation();
+  console.log("location.pathname", location.pathname, path);
+  const isActive = location.pathname === path;
   return (
     <div
-      onClick={() => onClick?.(path)}
-      className={`flex items-center gap-2 cursor-pointer 
-        ${isActive ? 'text-[#D100D7]' : 'hover:text-gray-300'}`}
+      onClick={() => hdlClick(path)}
+      className={`flex items-center gap-1 cursor-pointer 
+        ${isActive ? "text-pink-q" : "hover:text-gray-q-1 "}`}
     >
-      {React.cloneElement(icon, { color: isActive ? '#D100D7' : 'white' })}
+      {Icon && (
+        <Icon
+          className={`w-5 h-5 ${
+            isActive ? "text-pink-q" : "hover:text-gray-q-1 "
+          }`}
+        />
+      )}
       <div>{label}</div>
     </div>
   );

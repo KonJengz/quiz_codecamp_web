@@ -6,7 +6,7 @@ function Welcome(props) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_2128_138)">
+      <g clipPath="url(#clip0_2128_138)">
         <path
           d="M227.05 0.19043L225.621 25.1466H218.475L217.155 0.19043H227.05ZM241.562 0.19043L240.133 25.1466H232.987L231.667 0.19043H241.562Z"
           fill="#D9D9D9"
@@ -112,16 +112,6 @@ function Welcome(props) {
           fill="#D9D9D9"
         />
       </g>
-      <defs>
-        <clipPath id="clip0_2128_138">
-          <rect
-            width="456.907"
-            height="507.809"
-            fill="white"
-            transform="translate(0.905273 0.19043)"
-          />
-        </clipPath>
-      </defs>
     </svg>
   );
 }
