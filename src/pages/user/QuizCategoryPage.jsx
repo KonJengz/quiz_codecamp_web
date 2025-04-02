@@ -1,67 +1,66 @@
-import React from 'react';
-import Card from '../../components/Card';
-import Jupiter from '../../icons/Jupiter';
-import Rocket from '../../icons/Rocket';
+import React from "react";
+import Card from "../../components/Card";
+import Jupiter from "../../icons/Jupiter";
+import Rocket from "../../icons/Rocket";
 
 const data = [
   {
-    name: 'Variable',
+    name: "Variable",
     isSuccess: true,
-    finish: 78,
-    total: 120
+    finish: 120,
+    total: 120,
   },
   {
-    name: 'basic object',
+    name: "basic object",
     isSuccess: false,
     finish: 38,
-    total: 1200
+    total: 120,
   },
   {
-    name: 'Loop',
+    name: "Loop",
     isSuccess: false,
     finish: 798,
-    total: 1290
+    total: 1290,
   },
   {
-    name: 'basic array',
-    isSuccess: true,
-    finish: 20,
-    total: 120
-  },
-  {
-    name: 'basic array2',
+    name: "basic array",
     isSuccess: false,
-    finish: 8,
-    total: 180
-  }
+    finish: 20,
+    total: 120,
+  },
+  {
+    name: "basic array2",
+    isSuccess: false,
+    finish: 0,
+    total: 180,
+  },
 ];
 
 function QuizCategoryPage() {
   const hdlClick = () => {
-    console.log('first');
+    console.log("first");
   };
 
   return (
-    <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {data.map((item, index) => (
-          <div key={index} onClick={() => hdlClick()}>
-            <Card
-              key={index}
-              finish={item.finish}
-              total={item.total}
-              name={item.name}
-              icon={
-                item.isSuccess ? (
-                  <Jupiter />
-                ) : (
-                  <Rocket width={'120'} height={'120'} />
-                )
-              }
-            />
-          </div>
-        ))}
-      </div>
+    <div className="grid grid-cols-1 gap-4 p-8 justify-items-center sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8 xl:grid-cols-4 xl:gap-8 2xl:grid-cols-5 2xl:gap-12">
+      {data.map((item, index) => (
+        <Card
+          hdlClick={hdlClick}
+          key={index}
+          finish={item.finish}
+          total={item.total}
+          name={item.name}
+          icon={
+            item.isSuccess ? (
+              <Jupiter />
+            ) : item.finish === 0 ? (
+              <Rocket className={`w-25 fill-gray-q-2`} />
+            ) : (
+              <Rocket className={`w-25 fill-pink-q`} />
+            )
+          }
+        />
+      ))}
     </div>
   );
 }
