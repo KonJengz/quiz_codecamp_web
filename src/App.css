@@ -4,8 +4,36 @@
 }
 
 body {
-  background: linear-gradient(to bottom, #090016, #2d004f);
-  background: linear-gradient(to bottom, #2d004f, #090016);
+  /* background: linear-gradient(to bottom, #090016, #2d004f); */
+  /* background: linear-gradient(to bottom, #2d004f, #090016); */
+  
+  background: radial-gradient(98.42% 98.42% at 50% 1.58%, #3B1959 0%, #1A0A27 72.5%);
   min-height: 100vh;
   color: white;
 }
+
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@theme {
+  --color-blue-q: #3F34C0;
+  --color-purple-1: #1A0A27;
+  --color-purple-2: #261236;
+  --color-pink-q: #D100D7;
+  --color-gray-q-1: #D9D9D9;
+  --color-gray-q-2: #8F8F8F;
+  --shadow-1: 0px 0px 4px 0px #D100D7, 0px 0px 10px 0px #D100D7E2;
+  --shadow-2: 0px 0px 8px 0px #D100D7, 0px 0px 20px 0px #D100D7E2;
+  
+  --animate-rotate-border: border-rotate 3s linear infinite;
+
+  @keyframes border-rotate {
+    to {
+      --border-angle: 360deg;
+    }
+  }
+}
+
