@@ -2,6 +2,7 @@ import React from "react";
 import Card from "../../components/Card";
 import Jupiter from "../../icons/Jupiter";
 import Rocket from "../../icons/Rocket";
+import { useNavigate } from "react-router";
 
 const data = [
   {
@@ -34,18 +35,28 @@ const data = [
     finish: 0,
     total: 180,
   },
+  {
+    name: "monaco",
+    isSuccess: false,
+    finish: 0,
+    total: 180,
+    path: "/monaco",
+  },
 ];
 
 function QuizCategoryPage() {
-  const hdlClick = () => {
+  const navigate = useNavigate();
+
+  const hdlClick = (path) => {
     console.log("first");
+    if (path) navigate(path);
   };
 
   return (
     <div className="grid grid-cols-1 gap-4 p-8 justify-items-center sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8 xl:grid-cols-4 xl:gap-8 2xl:grid-cols-5 2xl:gap-12">
       {data.map((item, index) => (
         <Card
-          hdlClick={hdlClick}
+          hdlClick={() => hdlClick(item.path ?? "")}
           key={index}
           finish={item.finish}
           total={item.total}

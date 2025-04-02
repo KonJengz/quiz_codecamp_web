@@ -1,9 +1,9 @@
 import { Award } from "lucide-react";
 
-export default function Card({ name, finish, total, icon }) {
+export default function Card({ name, finish, total, icon, hdlClick }) {
   const percentage = (finish / total) * 100;
   return (
-    <div className="w-full space-y-4">
+    <div className="w-full space-y-4" onClick={hdlClick}>
       <div className="w-full space-y-4 bg-gray-q-1/8 rounded-2xl hover:shadow-2 transition-shadow duration-200 ease-in-out p-8">
         <div className="flex h-50 justify-center items-center">{icon}</div>
 
