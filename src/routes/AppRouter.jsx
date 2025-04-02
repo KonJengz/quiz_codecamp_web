@@ -5,7 +5,11 @@ import LoginPage from "../pages/LoginPage";
 import QuizPage from "../pages/user/QuizPage";
 import QuizCategoryPage from "../pages/user/QuizCategoryPage";
 import DashBoard from "../pages/admin/DashBoard";
+
+import ModalCreateQuiz from "../components/dashBoardComponents/ModalCreateQuiz";
+
 import Test from "../pages/pakinpor/Test";
+
 
 // const guestRouter = createBrowserRouter([
 //   { path: "/login", element: <LoginPage /> },
@@ -14,7 +18,11 @@ import Test from "../pages/pakinpor/Test";
 
 const router = createBrowserRouter([
   { path: "/login", element: <LoginPage /> },
+
+  {path: "/quize", element: <ModalCreateQuiz/>},
+
   { path: "/dashBoard", element: <DashBoard /> },
+
 
   {
     path: "/",
