@@ -11,6 +11,8 @@ import * as motion from "motion/react-client";
 import Lets from "../icons/Lets";
 import { LoaderCircle } from "lucide-react";
 import CheckBox from "../components/CheckBox";
+import useAuthStore from "../stores/authStore";
+import { AxiosError } from "axios";
 
 const initialInput = {
   username: "",
@@ -23,6 +25,8 @@ function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
+  const actionLogin = useAuthStore((state) => state.actionLogin);
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setInput((prev) => ({ ...prev, [name]: value }));
@@ -33,15 +37,18 @@ function LoginPage() {
     event.preventDefault();
     setIsLoading(true);
     try {
+      loginSchema.parse(input);
       if (!isChecked) {
         toast.error("Please check the checkbox");
         return;
       }
 
-      loginSchema.parse(input);
+      await actionLogin(input);
+
+      setInputError(initialInput);
+      setInput(initialInput);
 
       toast.success("Login successfully");
-      setInput(initialInput);
     } catch (error) {
       console.log(error);
 
@@ -51,8 +58,15 @@ function LoginPage() {
           return acc;
         }, {});
         setInputError(errMsg);
-        toast.error("invalid Login");
       }
+
+      if (error instanceof AxiosError) {
+        const errMsg = error.response?.data?.message;
+
+        return toast.error(errMsg);
+      }
+
+      toast.error("invalid Login");
     } finally {
       setIsLoading(false);
     }

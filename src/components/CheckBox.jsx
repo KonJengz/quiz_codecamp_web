@@ -12,7 +12,7 @@ function CheckBox({ isChecked, setIsChecked }) {
         <DotLottieReact
           className="w-10 h-10 scale-125"
           loop={false}
-          speed={1}
+          speed={2}
           autoplay={true}
           src="https://lottie.host/0ecbfdc2-4555-4389-b968-2826deaad531/Ya7gZsCCmG.lottie"
         />
