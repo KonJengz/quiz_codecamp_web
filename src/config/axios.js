@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:9898/api/v1";
+const baseUrl = "http://localhost:8080/api/v1";
 axios.defaults.baseURL = baseUrl;
 // axios.defaults.headers.common["Content-Type"] = "application/json";
 // axios.defaults.headers.common["Accept"] = "application/json";
