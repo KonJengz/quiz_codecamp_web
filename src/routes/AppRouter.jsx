@@ -5,18 +5,27 @@ import LoginPage from "../pages/LoginPage";
 import QuizPage from "../pages/user/QuizPage";
 import QuizCategoryPage from "../pages/user/QuizCategoryPage";
 import DashBoard from "../pages/admin/DashBoard";
+
+import ModalCreateQuiz from "../components/dashBoardComponents/ModalCreateQuiz";
+
 import Test from "../pages/pakinpor/Test";
 import ChallengeCategoryPage from "../pages/user/ChallengeCategoryPage";
 import useAuthStore from "../stores/authStore";
+
 
 const guestRouter = createBrowserRouter([
   { path: "/", element: <LoginPage /> },
   { path: "*", element: <Navigate to="/" /> },
 ]);
 
+
 const userRouter = createBrowserRouter([
   { path: "/login", element: <LoginPage /> },
+
+  {path: "/quize", element: <ModalCreateQuiz/>},
+
   { path: "/dashBoard", element: <DashBoard /> },
+
   {
     path: "/",
     element: <App />,
