@@ -1,7 +1,11 @@
 import status from 'daisyui/components/status';
 import React, { useState } from 'react';
+import Button from '../components/Button';
+import ButtonRun from '../components/ButtonRun';
+import DropDown from '../components/DropDown';
 
 function Desktop20() {
+  const [selected, setSelected] = useState('');
   const [data, setData] = useState([
     { username: 'codecamp20.01', Quiz: 86, Challenge: '24/24' },
     { username: 'codecamp20.02', Quiz: 88, Challenge: '5/24' },
@@ -48,98 +52,97 @@ function Desktop20() {
     setData(sortedData);
   };
 
-  return (
-    <div className="min-h-screen bg-[#D9D9D9] flex flex-col flex-1/3 m-7 rounded-2xl">
-      <div className="overflow-x-auto">
-        <table className="table">
-          <thead>
-            <tr>
-              <th onClick={() => sortData('No')} className="cursor-pointer">
-                No{' '}
-                {sortConfig.key === 'No' &&
-                  (sortConfig.direction === 'ascending' ? '↑' : '↓')}
-              </th>
-              <th>Name</th>
-              <th onClick={() => sortData('Quiz')} className="cursor-pointer">
-                Quiz{' '}
-                {sortConfig.key === 'Quiz' &&
-                  (sortConfig.direction === 'ascending' ? '↑' : '↓')}
-              </th>
-              <th
-                onClick={() => sortData('Challenge')}
-                className="cursor-pointer"
-              >
-                Challenge{' '}
-                {sortConfig.key === 'Challenge' &&
-                  (sortConfig.direction === 'ascending' ? '↑' : '↓')}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((row, index) => (
-              <tr className="hover:bg-base-300  text-black" key={index}>
-                <td>{index + 1}</td>
-                <td>{row.username}</td>
-                <td>{row.Quiz}</td>
-                <td>{row.Challenge}</td>
-                <td>
-                  {row?.status}
+  const handleEdit = () => {
+    console.log('handleEdit');
+  };
 
-                  <div className="flex justify-center items-center gap-2 mt-3">
-                    <span className="text-gray-500 flex items-center">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M11 19H4a1 1 0 01-1-1v-3.586a1 1 0 01.293-.707l12-12a1 1 0 011.414 0l3.586 3.586a1 1 0 010 1.414l-12 12a1 1 0 01-.707.293z"
-                        />
-                      </svg>
-                      Edit
-                    </span>
-                    <input
-                      type="checkbox"
-                      className="toggle toggle-md toggle-primary"
-                      //   checked={isEditing}
-                      //   onChange={() => setIsEditing(!isEditing)}
-                    />
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+  return (
+    <div>
+      <div className=" flex justify-between items-center p-4">
+        <div className=" flex  justify-center gap-2 items-center">
+          <ButtonRun>Category</ButtonRun>
+          <Button>Quiz</Button>
+
+          <ButtonRun>Learn</ButtonRun>
+
+          <DropDown />
+        </div>
+        <ButtonRun>Category</ButtonRun>
       </div>
-      <div className="flex justify-center items-center gap-2 mt-3">
-        <span className="text-gray-500 flex items-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M11 19H4a1 1 0 01-1-1v-3.586a1 1 0 01.293-.707l12-12a1 1 0 011.414 0l3.586 3.586a1 1 0 010 1.414l-12 12a1 1 0 01-.707.293z"
-            />
-          </svg>
-          Edit
-        </span>
-        <input
-          type="checkbox"
-          className="toggle toggle-md toggle-primary"
-          //   checked={isEditing}
-          //   onChange={() => setIsEditing(!isEditing)}
-        />
+
+      <div className="min-h-screen bg-[#D9D9D9] flex flex-col flex-1/3 m-7 rounded-2xl">
+        <div className="overflow-x-auto">
+          <table className="table">
+            <thead>
+              <tr>
+                <th onClick={() => sortData('No')} className="cursor-pointer">
+                  No{' '}
+                  {sortConfig.key === 'No' &&
+                    (sortConfig.direction === 'ascending' ? '↑' : '↓')}
+                </th>
+                <th>Name</th>
+                <th
+                  onClick={() => sortData('Category')}
+                  className="cursor-pointer"
+                >
+                  Category{' '}
+                  {sortConfig.key === 'Category' &&
+                    (sortConfig.direction === 'ascending' ? '↑' : '↓')}
+                </th>
+
+                <th className="cursor-pointer">
+                  Status{' '}
+                  {sortConfig.key === 'Status' &&
+                    (sortConfig.direction === 'ascending' ? '↑' : '↓')}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((row, index) => {
+                return (
+                  <tr className="hover:bg-base-300  text-black" key={index}>
+                    <td>{index + 1}</td>
+                    <td>{row.username}</td>
+
+                    <td>{row.Challenge}</td>
+                    <td>
+                      <div className="flex justify-start items-center gap-2 mt-3">
+                        <span className="text-gray-500 flex items-center gap-6">
+                          <input
+                            type="checkbox"
+                            className="toggle toggle-md toggle-primary"
+                            //   checked={isEditing}
+                            //   onChange={() => setIsEditing(!isEditing)}
+                          />
+                          <div
+                            onClick={() => handleEdit()}
+                            className=" flex justify-center items-center gap-0.5 cursor-pointer"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-4 w-4"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M11 19H4a1 1 0 01-1-1v-3.586a1 1 0 01.293-.707l12-12a1 1 0 011.414 0l3.586 3.586a1 1 0 010 1.414l-12 12a1 1 0 01-.707.293z"
+                              />
+                            </svg>
+                            <div> Edit</div>
+                          </div>
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
