@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import Button from '../components/Button';
 import ButtonRun from '../components/ButtonRun';
 import DropDown from '../components/DropDown';
+import ModalCreateLearn from '../components/ModalCreateLearn';
+import Plus from '../icons/plus';
+import axios from 'axios';
 
 function Desktop20() {
   const [selected, setSelected] = useState('');
@@ -56,95 +59,110 @@ function Desktop20() {
     console.log('handleEdit');
   };
 
+  const test = async () => {
+    await axios.get('http://localhost:8080/api/v1/categories');
+  };
+
   return (
-    <div>
-      <div className=" flex justify-between items-center p-4">
-        <div className=" flex  justify-center gap-2 items-center">
-          <ButtonRun>Category</ButtonRun>
-          <Button>Quiz</Button>
+    <>
+      <div>
+        <div className=" flex justify-between items-center p-4">
+          <div className=" flex  justify-center gap-2 items-center">
+            <ButtonRun>Category</ButtonRun>
+            <Button>Quiz</Button>
 
-          <ButtonRun>Learn</ButtonRun>
+            <div className=" border-r-2 pr-4 mr-3">
+              <ButtonRun>Learn</ButtonRun>
+            </div>
 
-          <DropDown />
+            <DropDown />
+          </div>
+          <ButtonRun
+            icon={<Plus />}
+            onClick={() => document.getElementById('my_modal_2').showModal()}
+          >
+            Category
+          </ButtonRun>
+          <button onClick={() => test()}>test</button>
         </div>
-        <ButtonRun>Category</ButtonRun>
-      </div>
 
-      <div className="min-h-screen bg-[#D9D9D9] flex flex-col flex-1/3 m-7 rounded-2xl">
-        <div className="overflow-x-auto">
-          <table className="table">
-            <thead>
-              <tr>
-                <th onClick={() => sortData('No')} className="cursor-pointer">
-                  No{' '}
-                  {sortConfig.key === 'No' &&
-                    (sortConfig.direction === 'ascending' ? '↑' : '↓')}
-                </th>
-                <th>Name</th>
-                <th
-                  onClick={() => sortData('Category')}
-                  className="cursor-pointer"
-                >
-                  Category{' '}
-                  {sortConfig.key === 'Category' &&
-                    (sortConfig.direction === 'ascending' ? '↑' : '↓')}
-                </th>
+        <div className="min-h-screen bg-[#D9D9D9] flex flex-col flex-1/3 m-7 rounded-2xl">
+          <div className="overflow-x-auto">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th onClick={() => sortData('No')} className="cursor-pointer">
+                    No{' '}
+                    {sortConfig.key === 'No' &&
+                      (sortConfig.direction === 'ascending' ? '↑' : '↓')}
+                  </th>
+                  <th>Name</th>
+                  <th
+                    onClick={() => sortData('Category')}
+                    className="cursor-pointer"
+                  >
+                    Category{' '}
+                    {sortConfig.key === 'Category' &&
+                      (sortConfig.direction === 'ascending' ? '↑' : '↓')}
+                  </th>
 
-                <th className="cursor-pointer">
-                  Status{' '}
-                  {sortConfig.key === 'Status' &&
-                    (sortConfig.direction === 'ascending' ? '↑' : '↓')}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((row, index) => {
-                return (
-                  <tr className="hover:bg-base-300  text-black" key={index}>
-                    <td>{index + 1}</td>
-                    <td>{row.username}</td>
+                  <th className="cursor-pointer">
+                    Status{' '}
+                    {sortConfig.key === 'Status' &&
+                      (sortConfig.direction === 'ascending' ? '↑' : '↓')}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((row, index) => {
+                  return (
+                    <tr className="hover:bg-base-300  text-black" key={index}>
+                      <td>{index + 1}</td>
+                      <td>{row.username}</td>
 
-                    <td>{row.Challenge}</td>
-                    <td>
-                      <div className="flex justify-start items-center gap-2 mt-3">
-                        <span className="text-gray-500 flex items-center gap-6">
-                          <input
-                            type="checkbox"
-                            className="toggle toggle-md toggle-primary"
-                            //   checked={isEditing}
-                            //   onChange={() => setIsEditing(!isEditing)}
-                          />
-                          <div
-                            onClick={() => handleEdit()}
-                            className=" flex justify-center items-center gap-0.5 cursor-pointer"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="h-4 w-4"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                              strokeWidth="2"
+                      <td>{row.Challenge}</td>
+                      <td>
+                        <div className="flex justify-start items-center gap-2 mt-3">
+                          <span className="text-gray-500 flex items-center gap-6">
+                            <input
+                              type="checkbox"
+                              className="toggle toggle-md toggle-primary"
+                              //   checked={isEditing}
+                              //   onChange={() => setIsEditing(!isEditing)}
+                            />
+                            <div
+                              onClick={() => handleEdit()}
+                              className=" flex justify-center items-center gap-0.5 cursor-pointer"
                             >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M11 19H4a1 1 0 01-1-1v-3.586a1 1 0 01.293-.707l12-12a1 1 0 011.414 0l3.586 3.586a1 1 0 010 1.414l-12 12a1 1 0 01-.707.293z"
-                              />
-                            </svg>
-                            <div> Edit</div>
-                          </div>
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-4 w-4"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M11 19H4a1 1 0 01-1-1v-3.586a1 1 0 01.293-.707l12-12a1 1 0 011.414 0l3.586 3.586a1 1 0 010 1.414l-12 12a1 1 0 01-.707.293z"
+                                />
+                              </svg>
+                              <div> Edit</div>
+                            </div>
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
+      <ModalCreateLearn />
+    </>
   );
 }
 
