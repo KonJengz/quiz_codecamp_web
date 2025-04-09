@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import Welcome from "../icons/Welcome";
-import InputLogin from "../components/InputLogin";
-import { loginSchema } from "../utils/validator";
-import { ZodError } from "zod";
-import { toast } from "react-toastify";
-import ButtonMain from "../components/ButtonMain";
-import Rocket from "../icons/Rocket";
+import React, { useState } from 'react';
+import Welcome from '../icons/Welcome';
+import InputLogin from '../components/InputLogin';
+import { loginSchema } from '../utils/validator';
+import { ZodError } from 'zod';
+import { toast } from 'react-toastify';
+import ButtonMain from '../components/ButtonMain';
+import Rocket from '../icons/Rocket';
 
-import * as motion from "motion/react-client";
-import Lets from "../icons/Lets";
-import { LoaderCircle } from "lucide-react";
-import CheckBox from "../components/CheckBox";
-import useAuthStore from "../stores/authStore";
-import { AxiosError } from "axios";
+import * as motion from 'motion/react-client';
+import Lets from '../icons/Lets';
+import { LoaderCircle } from 'lucide-react';
+import CheckBox from '../components/CheckBox';
+import useAuthStore from '../stores/authStore';
+import { AxiosError } from 'axios';
 
 const initialInput = {
-  username: "",
-  password: "",
+  username: '',
+  password: ''
 };
 
 function LoginPage() {
@@ -25,12 +25,14 @@ function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
+  const navigate = useNavigate();
+
   const actionLogin = useAuthStore((state) => state.actionLogin);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setInput((prev) => ({ ...prev, [name]: value }));
-    setInputError((prev) => ({ ...prev, [name]: "" }));
+    setInputError((prev) => ({ ...prev, [name]: '' }));
   };
 
   const handleSubmit = async (event) => {
@@ -39,7 +41,7 @@ function LoginPage() {
     try {
       loginSchema.parse(input);
       if (!isChecked) {
-        toast.error("Please check the checkbox");
+        toast.error('Please check the checkbox');
         return;
       }
 
@@ -48,7 +50,7 @@ function LoginPage() {
       setInputError(initialInput);
       setInput(initialInput);
 
-      toast.success("Login successfully");
+      toast.success('Login successfully');
     } catch (error) {
       console.log(error);
 
@@ -66,7 +68,7 @@ function LoginPage() {
         return toast.error(errMsg);
       }
 
-      toast.error("invalid Login");
+      toast.error('invalid Login');
     } finally {
       setIsLoading(false);
     }
@@ -80,10 +82,10 @@ function LoginPage() {
         transition={{
           duration: 0.3,
           scale: {
-            type: "spring",
+            type: 'spring',
             visualDuration: 0.3,
-            bounce: 0.5,
-          },
+            bounce: 0.5
+          }
         }}
       >
         <Welcome className="w-100" />
@@ -97,11 +99,11 @@ function LoginPage() {
             duration: 0.3,
             delay: 0.1,
             x: {
-              type: "spring",
+              type: 'spring',
               visualDuration: 0.3,
               bounce: 0.5,
-              delay: 0.1,
-            },
+              delay: 0.1
+            }
           }}
           className="text-2xl mb-6 flex items-end gap-2"
         >
@@ -118,11 +120,11 @@ function LoginPage() {
                 duration: 0.3,
                 delay: 0.2,
                 x: {
-                  type: "spring",
+                  type: 'spring',
                   visualDuration: 0.3,
                   bounce: 0.5,
-                  delay: 0.2,
-                },
+                  delay: 0.2
+                }
               }}
             >
               <InputLogin
@@ -141,11 +143,11 @@ function LoginPage() {
                 duration: 0.3,
                 delay: 0.3,
                 x: {
-                  type: "spring",
+                  type: 'spring',
                   visualDuration: 0.3,
                   bounce: 0.5,
-                  delay: 0.3,
-                },
+                  delay: 0.3
+                }
               }}
             >
               <InputLogin
@@ -165,11 +167,11 @@ function LoginPage() {
               duration: 0.3,
               delay: 0.4,
               x: {
-                type: "spring",
+                type: 'spring',
                 visualDuration: 0.3,
                 bounce: 0.5,
-                delay: 0.4,
-              },
+                delay: 0.4
+              }
             }}
             className="flex gap-2 mb-10 items-center"
           >
@@ -184,12 +186,12 @@ function LoginPage() {
             animate={{ opacity: 1 }}
             transition={{
               duration: 0.5,
-              delay: 0.75,
+              delay: 0.75
             }}
           >
             <ButtonMain
               btn="active"
-              disableBtn={input.password !== "" && input.username !== ""}
+              disableBtn={input.password !== '' && input.username !== ''}
             >
               {isLoading ? (
                 <LoaderCircle className="animate-spin" />
