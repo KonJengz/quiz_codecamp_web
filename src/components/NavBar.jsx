@@ -2,8 +2,13 @@ import { Menu, NotebookPen, X, Rocket } from 'lucide-react';
 import NavItem from './NavItem';
 import { useNavigate } from 'react-router';
 import useAuthStore from '../stores/authStore';
+import { toast } from 'react-toastify';
 
 function NavBar({ isOpen, setIsOpen, location }) {
+  const actionLogout = useAuthStore((state) => state.actionLogout);
+
+  //http://localhost:5174/quiz/1
+
   const menu = [
     {
       path: '/',
@@ -19,11 +24,25 @@ function NavBar({ isOpen, setIsOpen, location }) {
       label: 'logout'
     }
   ];
-  const { actionLogout } = useAuthStore((state) => state);
+
   const navigate = useNavigate();
 
-  const hdlNavigate = (path) => {
-    navigate(path);
+  // const hdlNavigate = (path) => {
+  //   navigate(path);
+  // };
+
+  // const hdlLogout = () => {
+  //   // handle logout logic here
+  //   console.log("Logout clicked");
+  // }
+  const handleMenuClick = (path, label) => {
+    console.log('path handleMenuClick =====', path, label);
+    if (label === 'logout') {
+      actionLogout();
+      toast.success('Logout successfully');
+    } else {
+      navigate(path);
+    }
   };
 
   return (
@@ -32,27 +51,23 @@ function NavBar({ isOpen, setIsOpen, location }) {
         <div>Codecamp 20_21</div>
 
         <div className="hidden md:flex items-center justify-center gap-8">
-          {menu.map((item, index) => {
-            const hdlClick =
-              item.label == 'logout' ? actionLogout : hdlNavigate;
-            return (
-              <NavItem
-                key={index}
-                path={item.path}
-                currentPath={location?.pathname}
-                icon={item.icon}
-                label={item.label}
-                hdlClick={hdlClick}
-              />
-            );
-          })}
+          {menu.map((item, index) => (
+            <NavItem
+              key={index}
+              path={item.path}
+              currentPath={location?.pathname}
+              icon={item.icon}
+              label={item.label}
+              hdlClick={handleMenuClick}
+            />
+          ))}
         </div>
 
-        <div className="md:hidden">
+        {/* <div className="md:hidden">
           <button onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
-        </div>
+        </div> */}
       </div>
 
       <div className="h-[1px] w-full bg-white"></div>

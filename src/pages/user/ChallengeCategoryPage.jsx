@@ -1,8 +1,8 @@
-import { useCallback } from "react";
+import { useLocation, useNavigate } from "react-router";
 import Card from "../../components/Card";
 import Jupiter from "../../icons/Jupiter";
 import Rocket from "../../icons/Rocket";
-import { useNavigate } from "react-router";
+import { useCallback } from "react";
 
 const data = [
   {
@@ -42,11 +42,11 @@ const data = [
   },
 ];
 
-function QuizCategoryPage() {
+function ChallengeCategoryPage() {
   const navigate = useNavigate();
 
-  const hdlClick = useCallback((id) => {
-    navigate(`/quiz/${id}`);
+  const hdlClick = useCallback((categoryId) => {
+    navigate(`/challenge/${categoryId}`);
   }, []);
 
   return (
@@ -54,11 +54,10 @@ function QuizCategoryPage() {
       {data.map((item, index) => (
         <Card
           hdlClick={hdlClick}
-          key={item.id}
+          key={index}
           finish={item.finish}
           total={item.total}
           name={item.name}
-          id={item.id}
           icon={
             item.isSuccess ? (
               <Jupiter />
@@ -73,5 +72,4 @@ function QuizCategoryPage() {
     </div>
   );
 }
-
-export default QuizCategoryPage;
+export default ChallengeCategoryPage;
