@@ -14,7 +14,8 @@ import useAuthStore from '../stores/authStore';
 
 const guestRouter = createBrowserRouter([
   { path: '/', element: <LoginPage /> },
-  { path: '*', element: <Navigate to="/" /> }
+  { path: '*', element: <Navigate to="/" /> },
+  { path: '/test', element: <Test /> }
 ]);
 
 const userRouter = createBrowserRouter([
@@ -35,6 +36,7 @@ const userRouter = createBrowserRouter([
       { path: '/quiz/:categoryId/', element: <QuizPage /> },
       { path: '/challenge/:categoryId/', element: <QuizPage /> },
       { path: '/challenge', element: <ChallengeCategoryPage /> },
+      { path: '/test', element: <Test /> },
       { path: '*', element: <Navigate to="/" /> }
     ]
   }

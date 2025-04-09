@@ -1,5 +1,5 @@
 import React from 'react';
-import Desktop from '../../template/Desktop14';
+import Desktop from '../../template/Desktop12';
 
 export default function Test() {
   return (
