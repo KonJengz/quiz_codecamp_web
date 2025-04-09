@@ -25,8 +25,6 @@ function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
-  const navigate = useNavigate();
-
   const actionLogin = useAuthStore((state) => state.actionLogin);
 
   const handleInputChange = (event) => {
