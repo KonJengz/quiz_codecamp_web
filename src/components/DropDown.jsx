@@ -10,8 +10,8 @@ export default function DropDown({ value }) {
     <div>
       <div className="relative inline-block">
         <select
-          className="bg-transparent text-white py-2 px-4 rounded-full border border-transparent
-  focus:outline-none focus:ring-2
+          className="bg-transparent text-white py-2 px-4 rounded-[8px] border  border-amber-300  
+  
   appearance-none
   text-lg font-semibold
   custom-border-gradient"
