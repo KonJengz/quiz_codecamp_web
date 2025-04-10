@@ -1,27 +1,29 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
-import authApi from "../api/authApi";
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import authApi from '../api/authApi';
 
 const useAuthStore = create(
   persist(
     (set) => ({
       user: null,
-      token: "",
+      accessToken: '',
       actionLogin: async (input) => {
         const result = await authApi.login(input);
-        set({ token: result.data.accessToken });
+        console.log('result', result.data.data.accessToken);
+        set({ accessToken: result.data.data.accessToken });
+        return result.data.data.accessToken;
       },
       actionLogout: () => {
-        set({ token: "", user: null });
-        localStorage.removeItem("user-auth");
-      },
+        set({ accessToken: '', user: null });
+        localStorage.removeItem('accessToken');
+      }
     }),
     {
-      name: "user-auth",
+      name: 'accessToken',
       getStorage: () => localStorage,
       partialize: (state) => ({
-        token: state.token,
-      }),
+        accessToken: state.accessToken
+      })
     }
   )
 );

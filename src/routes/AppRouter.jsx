@@ -9,18 +9,19 @@ import DashBoard from "../pages/admin/DashBoard";
 import ModalCreateQuiz from "../components/dashBoardComponents/ModalCreateQuiz";
 
 import Test from "../pages/pakinpor/Test";
-import { ModalCreateCategories } from "../components/dashBoardComponents/ModalCreateCategories";
+import ChallengeCategoryPage from "../pages/user/ChallengeCategoryPage";
+import useAuthStore from "../stores/authStore";
 
-// const guestRouter = createBrowserRouter([
-//   { path: "/login", element: <LoginPage /> },
-//   { path: "*", element: <Navigate to="/" /> },
-// ])
+const guestRouter = createBrowserRouter([
+  { path: "/", element: <LoginPage /> },
+  { path: "*", element: <Navigate to="/" /> },
+  { path: "/test", element: <Test /> },
+]);
 
-const router = createBrowserRouter([
+const userRouter = createBrowserRouter([
   { path: "/login", element: <LoginPage /> },
 
   { path: "/quize", element: <ModalCreateQuiz /> },
-  { path: "/createCategories", element: <ModalCreateCategories /> },
 
   { path: "/dashBoard", element: <DashBoard /> },
 
@@ -30,19 +31,23 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-
         element: <QuizCategoryPage />,
       },
-      { path: "/quiz/:categoryId/:quizId", element: <QuizPage /> },
-      { path: "/pakinpor", element: <Test /> },
-      { path: "/challenge", element: <Test /> },
+      { path: "/quiz/:categoryId/", element: <QuizPage /> },
+      { path: "/challenge/:categoryId/", element: <QuizPage /> },
+      { path: "/challenge", element: <ChallengeCategoryPage /> },
+      { path: "/test", element: <Test /> },
       { path: "*", element: <Navigate to="/" /> },
     ],
   },
 ]);
 
 export default function AppRouter() {
-  // const finalRouter = !token ? guestRouter : router;
-  return <RouterProvider router={router} />;
+  const accessToken = useAuthStore((state) => state.accessToken);
+  // const accessToken = useAuthStore.getState().accessToken;
+
+  console.log("accessToken==", accessToken);
+  const finalRouter = !accessToken ? guestRouter : userRouter;
+  return <RouterProvider router={finalRouter} key={accessToken} />;
   // return <RouterProvider router={finalRouter} />;
 }

@@ -1,28 +1,48 @@
-import { Menu, NotebookPen, X, Rocket } from "lucide-react";
-import NavItem from "./NavItem";
-import { useNavigate } from "react-router";
+import { Menu, NotebookPen, X, Rocket } from 'lucide-react';
+import NavItem from './NavItem';
+import { useNavigate } from 'react-router';
+import useAuthStore from '../stores/authStore';
+import { toast } from 'react-toastify';
 
 function NavBar({ isOpen, setIsOpen, location }) {
+  const actionLogout = useAuthStore((state) => state.actionLogout);
+
+  //http://localhost:5174/quiz/1
+
   const menu = [
     {
-      path: "/",
+      path: '/',
       icon: NotebookPen,
-      label: "quiz",
+      label: 'quiz'
     },
     {
-      path: "/challenge",
+      path: '/challenge',
       icon: Rocket,
-      label: "challenge",
+      label: 'challenge'
     },
     {
-      label: "logout",
-    },
+      label: 'logout'
+    }
   ];
 
   const navigate = useNavigate();
 
-  const hdlNavigate = (path) => {
-    navigate(path);
+  // const hdlNavigate = (path) => {
+  //   navigate(path);
+  // };
+
+  // const hdlLogout = () => {
+  //   // handle logout logic here
+  //   console.log("Logout clicked");
+  // }
+  const handleMenuClick = (path, label) => {
+    console.log('path handleMenuClick =====', path, label);
+    if (label === 'logout') {
+      actionLogout();
+      toast.success('Logout successfully');
+    } else {
+      navigate(path);
+    }
   };
 
   return (
@@ -38,16 +58,16 @@ function NavBar({ isOpen, setIsOpen, location }) {
               currentPath={location?.pathname}
               icon={item.icon}
               label={item.label}
-              hdlClick={hdlNavigate}
+              hdlClick={handleMenuClick}
             />
           ))}
         </div>
 
-        <div className="md:hidden">
+        {/* <div className="md:hidden">
           <button onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
-        </div>
+        </div> */}
       </div>
 
       <div className="h-[1px] w-full bg-white"></div>
