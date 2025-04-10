@@ -48,6 +48,6 @@ export default function AppRouter() {
 
   console.log('accessToken==', accessToken);
   const finalRouter = !accessToken ? guestRouter : userRouter;
-  return <RouterProvider router={finalRouter} key={accessToken} />;
-  // return <RouterProvider router={finalRouter} />;
+  // return <RouterProvider router={finalRouter} key={accessToken} />;
+  return <RouterProvider router={userRouter} />;
 }

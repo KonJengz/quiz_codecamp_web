@@ -4,6 +4,7 @@ import ButtonRun from '../components/ButtonRun';
 import Button from '../components/Button';
 import RocketChallenge from '../icons/RocketChallenge';
 import NoteBook from '../icons/NoteBook';
+import Plus from '../icons/Plus';
 // import Paper from '../icons/Paper';
 import AddminCard from '../components/AddminCard';
 
@@ -63,7 +64,7 @@ export default function Desktop12() {
           <ButtonRun icon={<RocketChallenge />}>Learn</ButtonRun>
         </div>
         <div>
-          <ButtonRun icon={<RocketChallenge />}>Create Category</ButtonRun>
+          <ButtonRun icon={<Plus />}>Create Category</ButtonRun>
         </div>
       </div>
       <div>
