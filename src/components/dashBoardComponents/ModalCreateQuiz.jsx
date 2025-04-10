@@ -50,7 +50,7 @@ function ModalCreateQuiz() {
           </div>
           <div className="mt-2 flex-1 ">
             <h1>Details</h1>
-            <Editor className="textarea textarea-primary w-full h-[40%] " />
+            <Editor className="textarea textarea-primary w-full h-[40%] justify-start " />
             {/* <textarea
               type="text"
               placeholder="Enter Details Quiz"

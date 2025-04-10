@@ -9,7 +9,7 @@ import DashBoard from "../pages/admin/DashBoard";
 import ModalCreateQuiz from "../components/dashBoardComponents/ModalCreateQuiz";
 
 import Test from "../pages/pakinpor/Test";
-
+import { ModalCreateCategories } from "../components/dashBoardComponents/ModalCreateCategories";
 
 // const guestRouter = createBrowserRouter([
 //   { path: "/login", element: <LoginPage /> },
@@ -19,10 +19,10 @@ import Test from "../pages/pakinpor/Test";
 const router = createBrowserRouter([
   { path: "/login", element: <LoginPage /> },
 
-  {path: "/quize", element: <ModalCreateQuiz/>},
+  { path: "/quize", element: <ModalCreateQuiz /> },
+  { path: "/createCategories", element: <ModalCreateCategories /> },
 
   { path: "/dashBoard", element: <DashBoard /> },
-
 
   {
     path: "/",

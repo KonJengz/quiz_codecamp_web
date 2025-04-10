@@ -13,7 +13,7 @@ const Editor = () => {
       holder: editorRef.current, // Attach Editor.js to the div
       placeholder: "Enter Detail Quiz",
       tools: {
-        header: { inlineToolbar: false },
+        // header: { inlineToolbar: false },
         // header: Header, // Add Header plugin
         //   list: List, // Add List plugin
         //   image: ImageTool, // Add Image plugin
