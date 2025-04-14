@@ -5,9 +5,12 @@ import LoginPage from "../pages/LoginPage";
 import QuizPage from "../pages/user/QuizPage";
 import QuizCategoryPage from "../pages/user/QuizCategoryPage";
 import DashBoard from "../pages/admin/DashBoard";
-import Test from "../pages/pakinpor/Test";
 import ChallengeCategoryPage from "../pages/user/ChallengeCategoryPage";
 import useAuthStore from "../stores/authStore";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+import { AxiosError } from "axios";
+import { shallow } from "zustand/shallow";
 
 const guestRouter = createBrowserRouter([
   { path: "/", element: <LoginPage /> },
@@ -35,10 +38,28 @@ const userRouter = createBrowserRouter([
 
 export default function AppRouter() {
   const accessToken = useAuthStore((state) => state.accessToken);
-  // const accessToken = useAuthStore.getState().accessToken;
+  const actionGetMe = useAuthStore((state) => state.actionGetMe, shallow);
+  const user = useAuthStore((state) => state.user);
+
+  useEffect(() => {
+    const fecthUser = async () => {
+      try {
+        await actionGetMe();
+      } catch (error) {
+        if (error instanceof AxiosError) {
+          toast.error(error.response.data.message);
+        }
+      }
+    };
+    if (accessToken) {
+      fecthUser();
+    }
+    console.log("first");
+  }, [accessToken, actionGetMe]);
 
   console.log("accessToken==", accessToken);
+  console.log("user==", user);
+
   const finalRouter = !accessToken ? guestRouter : userRouter;
-  return <RouterProvider router={finalRouter} key={accessToken} />;
-  // return <RouterProvider router={finalRouter} />;
+  return <RouterProvider router={finalRouter} key={user?.id} />;
 }

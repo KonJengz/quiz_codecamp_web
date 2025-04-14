@@ -1,9 +1,8 @@
 import { useLocation } from "react-router";
 
 export default function NavItem({ path, icon: Icon, label, hdlClick }) {
-  //http://localhost:5174/quiz/1
   const location = useLocation();
-  console.log("location.pathname", location.pathname, path);
+
   let isActive = location.pathname.includes(label);
 
   if (label === "quiz" && location.pathname === "/") {

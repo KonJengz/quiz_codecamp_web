@@ -1,8 +1,9 @@
-import { useCallback } from "react";
+import { use, useCallback } from "react";
 import Card from "../../components/Card";
 import Jupiter from "../../icons/Jupiter";
 import Rocket from "../../icons/Rocket";
 import { useNavigate } from "react-router";
+import useAuthStore from "../../stores/authStore";
 
 const data = [
   {
@@ -44,6 +45,8 @@ const data = [
 
 function QuizCategoryPage() {
   const navigate = useNavigate();
+  const user = useAuthStore((state) => state.user);
+  console.log("user QuizCategoryPage", user);
 
   const hdlClick = useCallback((id) => {
     navigate(`/quiz/${id}`);
