@@ -1,11 +1,18 @@
-import React from 'react'
+import EditorWrapper from "../monaco_test/layout/EditorLayout";
+import Solution from "./Solution";
 
 function CodeSideBar() {
-    return (
-        <div className='bg-blue-400 rounded-xl min-h-screen flex flex-1/2 m-2'>
-            CodeSideBar
-        </div>
-    )
+  return (
+    <div className="flex flex-col gap-2 flex-5/12">
+      <div className="flex flex-col text-sm">
+        <Solution />
+      </div>
+
+      <>
+        <EditorWrapper />
+      </>
+    </div>
+  );
 }
 
-export default CodeSideBar
+export default CodeSideBar;

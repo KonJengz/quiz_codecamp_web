@@ -7,7 +7,7 @@ authApi.login = async (body) => {
 };
 
 authApi.getMe = async () => {
-  return axios.get("/auth/me");
+  return axios.get("/users/me");
 };
 
 export default authApi;

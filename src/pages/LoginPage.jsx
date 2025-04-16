@@ -26,6 +26,7 @@ function LoginPage() {
   const [isChecked, setIsChecked] = useState(false);
 
   const actionLogin = useAuthStore((state) => state.actionLogin);
+  const actionGetMe = useAuthStore((state) => state.actionGetMe);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -44,6 +45,7 @@ function LoginPage() {
       }
 
       await actionLogin(input);
+      await actionGetMe();
 
       setInputError(initialInput);
       setInput(initialInput);

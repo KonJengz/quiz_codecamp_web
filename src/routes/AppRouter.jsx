@@ -11,6 +11,9 @@ import ModalCreateQuiz from "../components/dashBoardComponents/ModalCreateQuiz";
 import Test from "../pages/pakinpor/Test";
 import ChallengeCategoryPage from "../pages/user/ChallengeCategoryPage";
 import useAuthStore from "../stores/authStore";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { AxiosError } from "axios";
 
 const guestRouter = createBrowserRouter([
   { path: "/", element: <LoginPage /> },
@@ -42,12 +45,58 @@ const userRouter = createBrowserRouter([
   },
 ]);
 
-export default function AppRouter() {
-  const accessToken = useAuthStore((state) => state.accessToken);
-  // const accessToken = useAuthStore.getState().accessToken;
+const adminRouter = createBrowserRouter([
+  { path: "/dashBoard", element: <DashBoard /> },
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        index: true,
+        element: <DashBoard />,
+      },
+      { path: "*", element: <Navigate to="/" /> },
+    ],
+  },
+]);
 
-  console.log("accessToken==", accessToken);
-  const finalRouter = !accessToken ? guestRouter : userRouter;
-  return <RouterProvider router={finalRouter} key={accessToken} />;
-  // return <RouterProvider router={finalRouter} />;
+export default function AppRouter() {
+  const accessToken = useAuthStore.getState().accessToken;
+  const actionGetMe = useAuthStore((state) => state.actionGetMe);
+  const user = useAuthStore((state) => state.user);
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fecthUser = async () => {
+      try {
+        await actionGetMe();
+      } catch (error) {
+        console.log("error fecthUser", error);
+        if (error instanceof AxiosError) {
+          toast.error(error?.response?.data?.message);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+    if (accessToken) {
+      fecthUser();
+    }
+  }, [accessToken, actionGetMe]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <h1 className="text-3xl font-bold">Loading...</h1>
+      </div>
+    );
+  }
+
+  const finalRouter = !user
+    ? guestRouter
+    : user.role === "STUDENT"
+    ? userRouter
+    : adminRouter;
+  return <RouterProvider router={finalRouter} key={user?.id} />;
 }
