@@ -5,6 +5,12 @@ import LoginPage from "../pages/LoginPage";
 import QuizPage from "../pages/user/QuizPage";
 import QuizCategoryPage from "../pages/user/QuizCategoryPage";
 import DashBoard from "../pages/admin/DashBoard";
+
+
+import ModalCreateQuiz from "../components/dashBoardComponents/ModalCreateQuiz";
+
+import Test from "../pages/pakinpor/Test";
+
 import ChallengeCategoryPage from "../pages/user/ChallengeCategoryPage";
 import useAuthStore from "../stores/authStore";
 import { useEffect, useState } from "react";
@@ -14,11 +20,16 @@ import { AxiosError } from "axios";
 const guestRouter = createBrowserRouter([
   { path: "/", element: <LoginPage /> },
   { path: "*", element: <Navigate to="/" /> },
+  { path: "/test", element: <Test /> },
 ]);
 
 const userRouter = createBrowserRouter([
   { path: "/login", element: <LoginPage /> },
+
+  { path: "/quize", element: <ModalCreateQuiz /> },
+
   { path: "/dashBoard", element: <DashBoard /> },
+
   {
     path: "/",
     element: <App />,
@@ -30,6 +41,7 @@ const userRouter = createBrowserRouter([
       { path: "/quiz/:categoryId/", element: <QuizPage /> },
       { path: "/challenge/:categoryId/", element: <QuizPage /> },
       { path: "/challenge", element: <ChallengeCategoryPage /> },
+      { path: "/test", element: <Test /> },
       { path: "*", element: <Navigate to="/" /> },
     ],
   },
