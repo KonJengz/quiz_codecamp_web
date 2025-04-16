@@ -1,8 +1,8 @@
-import { Menu, NotebookPen, X, Rocket } from "lucide-react";
-import NavItem from "./NavItem";
-import { useNavigate } from "react-router";
-import useAuthStore from "../stores/authStore";
-import { toast } from "react-toastify";
+import { Menu, NotebookPen, X, Rocket } from 'lucide-react';
+import NavItem from './NavItem';
+import { useNavigate } from 'react-router';
+import useAuthStore from '../stores/authStore';
+import { toast } from 'react-toastify';
 
 function NavBar({ location }) {
   const actionLogout = useAuthStore((state) => state.actionLogout);
@@ -10,27 +10,27 @@ function NavBar({ location }) {
 
   const menu = [
     {
-      path: "/",
+      path: '/',
       icon: NotebookPen,
-      label: "quiz",
+      label: 'quiz'
     },
     {
-      path: "/challenge",
+      path: '/challenge',
       icon: Rocket,
-      label: "challenge",
+      label: 'challenge'
     },
     {
-      label: "logout",
-    },
+      label: 'logout'
+    }
   ];
 
   const navigate = useNavigate();
 
   const handleMenuClick = (path, label) => {
-    console.log("path handleMenuClick =====", path, label);
-    if (label === "logout") {
+    console.log('path handleMenuClick =====', path, label);
+    if (label === 'logout') {
       actionLogout();
-      toast.success("Logout successfully");
+      toast.success('Logout successfully');
     } else {
       navigate(path);
     }
