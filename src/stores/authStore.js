@@ -17,8 +17,6 @@ const useAuthStore = create(
       },
       actionGetMe: async () => {
         const result = await authApi.getMe();
-        console.log("result actionGetMe", result);
-
         set({ user: result.data.data });
         return result;
       },

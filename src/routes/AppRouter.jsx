@@ -7,10 +7,9 @@ import QuizCategoryPage from "../pages/user/QuizCategoryPage";
 import DashBoard from "../pages/admin/DashBoard";
 import ChallengeCategoryPage from "../pages/user/ChallengeCategoryPage";
 import useAuthStore from "../stores/authStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
-import { shallow } from "zustand/shallow";
 
 const guestRouter = createBrowserRouter([
   { path: "/", element: <LoginPage /> },
@@ -36,30 +35,58 @@ const userRouter = createBrowserRouter([
   },
 ]);
 
+const adminRouter = createBrowserRouter([
+  { path: "/dashBoard", element: <DashBoard /> },
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        index: true,
+        element: <DashBoard />,
+      },
+      { path: "*", element: <Navigate to="/" /> },
+    ],
+  },
+]);
+
 export default function AppRouter() {
-  const accessToken = useAuthStore((state) => state.accessToken);
-  const actionGetMe = useAuthStore((state) => state.actionGetMe, shallow);
+  const accessToken = useAuthStore.getState().accessToken;
+  const actionGetMe = useAuthStore((state) => state.actionGetMe);
   const user = useAuthStore((state) => state.user);
+
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fecthUser = async () => {
       try {
         await actionGetMe();
       } catch (error) {
+        console.log("error fecthUser", error);
         if (error instanceof AxiosError) {
-          toast.error(error.response.data.message);
+          toast.error(error?.response?.data?.message);
         }
+      } finally {
+        setLoading(false);
       }
     };
     if (accessToken) {
       fecthUser();
     }
-    console.log("first");
   }, [accessToken, actionGetMe]);
 
-  console.log("accessToken==", accessToken);
-  console.log("user==", user);
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <h1 className="text-3xl font-bold">Loading...</h1>
+      </div>
+    );
+  }
 
-  const finalRouter = !accessToken ? guestRouter : userRouter;
+  const finalRouter = !user
+    ? guestRouter
+    : user.role === "STUDENT"
+    ? userRouter
+    : adminRouter;
   return <RouterProvider router={finalRouter} key={user?.id} />;
 }

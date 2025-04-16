@@ -45,8 +45,7 @@ function LoginPage() {
       }
 
       await actionLogin(input);
-      const result = await actionGetMe();
-      console.log("result actionGetMe", result);
+      await actionGetMe();
 
       setInputError(initialInput);
       setInput(initialInput);

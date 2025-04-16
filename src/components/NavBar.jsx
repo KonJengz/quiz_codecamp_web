@@ -4,10 +4,9 @@ import { useNavigate } from "react-router";
 import useAuthStore from "../stores/authStore";
 import { toast } from "react-toastify";
 
-function NavBar({ isOpen, setIsOpen, location }) {
+function NavBar({ location }) {
   const actionLogout = useAuthStore((state) => state.actionLogout);
-
-  //http://localhost:5174/quiz/1
+  const user = useAuthStore((state) => state.user);
 
   const menu = [
     {
@@ -27,14 +26,6 @@ function NavBar({ isOpen, setIsOpen, location }) {
 
   const navigate = useNavigate();
 
-  // const hdlNavigate = (path) => {
-  //   navigate(path);
-  // };
-
-  // const hdlLogout = () => {
-  //   // handle logout logic here
-  //   console.log("Logout clicked");
-  // }
   const handleMenuClick = (path, label) => {
     console.log("path handleMenuClick =====", path, label);
     if (label === "logout") {
@@ -46,9 +37,9 @@ function NavBar({ isOpen, setIsOpen, location }) {
   };
 
   return (
-    <div className="py-2 px-4 h-16 flex flex-col gap-2 justify-end">
-      <div className="flex items-center justify-between px-4">
-        <div>Codecamp 20_21</div>
+    <div className="px-8 h-16 flex flex-col gap-3 justify-end">
+      <div className="flex items-center justify-between">
+        <div>{user?.username}</div>
 
         <div className="hidden md:flex items-center justify-center gap-8">
           {menu.map((item, index) => (
@@ -62,15 +53,9 @@ function NavBar({ isOpen, setIsOpen, location }) {
             />
           ))}
         </div>
-
-        {/* <div className="md:hidden">
-          <button onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
-        </div> */}
       </div>
 
-      <div className="h-[1px] w-full bg-white"></div>
+      <div className="h-[1px] w-full bg-white/50"></div>
     </div>
   );
 }

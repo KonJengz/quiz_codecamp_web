@@ -1,4 +1,5 @@
 import axios from "axios";
+import useAuthStore from "../stores/authStore";
 
 const baseUrl = "http://localhost:8080/api/v1";
 axios.defaults.baseURL = baseUrl;
@@ -9,9 +10,10 @@ axios.defaults.baseURL = baseUrl;
 // axios.defaults.headers.common["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE";
 
 const getToken = () => {
-  const token = localStorage.getItem("token");
+  const token = useAuthStore.getState().accessToken;
   return token ? token : "";
 };
+
 axios.interceptors.request.use(
   (config) => {
     const token = getToken();
@@ -30,8 +32,9 @@ axios.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response.status === 401) {
-      localStorage.removeItem("token");
+    console.log("error interceptors", error);
+    if (error?.response?.status === 401) {
+      localStorage.removeItem("accessToken");
       window.location.href = "/";
     }
     return Promise.reject(error);

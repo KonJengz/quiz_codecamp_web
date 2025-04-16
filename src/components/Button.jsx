@@ -1,4 +1,3 @@
-import React from "react";
 import Rocket from "../icons/Rocket";
 
 export default function Button({
