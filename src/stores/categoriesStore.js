@@ -7,6 +7,10 @@ const useCategoriesStore = create((set) => ({
     const result = await categoiesApi.getCategories();
     set({ categories: result.data.data });
   },
+  actionGetCategoriesQuery: async (query) => {
+    const result = await categoiesApi.getCategoriesQuery(query);
+    set({ categories: result.data.data });
+  },
 }));
 
 export default useCategoriesStore;

@@ -5,6 +5,9 @@ const categoiesApi = {};
 categoiesApi.getCategories = async () => {
   return axios.get("/categories/me");
 };
+categoiesApi.getCategoriesQuery = async (query) => {
+  return axios.get(`/categories/me?cha=${query}`);
+};
 categoiesApi.getCategory = async (id) => {
   return axios.get(`/categories/${id}`);
 };

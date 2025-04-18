@@ -5,7 +5,10 @@ export default function NavItem({ path, icon: Icon, label, hdlClick }) {
 
   let isActive = location.pathname.includes(label);
 
-  if (label === "quiz" && location.pathname === "/") {
+  if (
+    (label === "quiz" && location.pathname === "/" && path === "/") ||
+    (label === "dashBoard" && location.pathname === "/" && path === "/")
+  ) {
     isActive = true;
   }
 

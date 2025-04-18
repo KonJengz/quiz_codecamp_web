@@ -14,6 +14,7 @@ import useAuthStore from "../stores/authStore";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
+import AdminLayout from "../layouts/AdminLayout";
 
 const guestRouter = createBrowserRouter([
   { path: "/", element: <LoginPage /> },
@@ -23,9 +24,7 @@ const guestRouter = createBrowserRouter([
 
 const userRouter = createBrowserRouter([
   { path: "/login", element: <LoginPage /> },
-
   { path: "/quize", element: <ModalCreateQuiz /> },
-
   { path: "/dashBoard", element: <DashBoard /> },
 
   {
@@ -38,7 +37,7 @@ const userRouter = createBrowserRouter([
       },
       { path: "/quiz/:categoryId/", element: <QuizPage /> },
       { path: "/challenge/:categoryId/", element: <QuizPage /> },
-      { path: "/challenge", element: <ChallengeCategoryPage /> },
+      { path: "/challenge", element: <QuizCategoryPage /> },
       { path: "/test", element: <Test /> },
       { path: "*", element: <Navigate to="/" /> },
     ],
@@ -46,15 +45,16 @@ const userRouter = createBrowserRouter([
 ]);
 
 const adminRouter = createBrowserRouter([
-  { path: "/dashBoard", element: <DashBoard /> },
   {
     path: "/",
-    element: <App />,
+    element: <AdminLayout />,
     children: [
       {
         index: true,
         element: <DashBoard />,
       },
+      { path: "/quiz", element: <DashBoard /> },
+      { path: "/challenge", element: <DashBoard /> },
       { path: "*", element: <Navigate to="/" /> },
     ],
   },
@@ -69,6 +69,7 @@ export default function AppRouter() {
 
   useEffect(() => {
     const fecthUser = async () => {
+      setLoading(true);
       try {
         await actionGetMe();
       } catch (error) {
@@ -80,8 +81,11 @@ export default function AppRouter() {
         setLoading(false);
       }
     };
+
     if (accessToken) {
       fecthUser();
+    } else {
+      setLoading(false);
     }
   }, [accessToken, actionGetMe]);
 

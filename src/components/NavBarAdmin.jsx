@@ -1,12 +1,17 @@
-import { Menu, NotebookPen, X, Rocket } from "lucide-react";
-import NavItem from "./NavItem";
 import { useNavigate } from "react-router";
 import useAuthStore from "../stores/authStore";
 import { toast } from "react-toastify";
+import { Menu, NotebookPen, X, Rocket, Gauge } from "lucide-react";
+import NavItem from "./NavItem";
 
 const menu = [
   {
     path: "/",
+    icon: Gauge,
+    label: "dashBoard",
+  },
+  {
+    path: "/quiz",
     icon: NotebookPen,
     label: "quiz",
   },
@@ -20,13 +25,14 @@ const menu = [
   },
 ];
 
-function NavBar({ location }) {
+function NavBarAdmin() {
   const actionLogout = useAuthStore((state) => state.actionLogout);
   const user = useAuthStore((state) => state.user);
 
   const navigate = useNavigate();
 
   const handleMenuClick = (path, label) => {
+    console.log("path, label", path, label);
     if (label === "logout") {
       actionLogout();
       toast.success("Logout successfully");
@@ -45,7 +51,6 @@ function NavBar({ location }) {
             <NavItem
               key={index}
               path={item.path}
-              currentPath={location?.pathname}
               icon={item.icon}
               label={item.label}
               hdlClick={handleMenuClick}
@@ -58,4 +63,4 @@ function NavBar({ location }) {
     </div>
   );
 }
-export default NavBar;
+export default NavBarAdmin;
