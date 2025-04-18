@@ -108,7 +108,6 @@ function QuizCategoryPage() {
   }, []);
 
   const { pathname } = useLocation();
-  console.log("pathname", pathname);
 
   useEffect(() => {
     const fetchCategories = async () => {
