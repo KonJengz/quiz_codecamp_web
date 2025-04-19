@@ -44,10 +44,10 @@ function SideBarMenu({ questions }) {
   };
 
   useEffect(() => {
-    if (questions[0]?.questionId) {
+    if (!question && questions[0]?.questionId) {
       handleClick(questions[0]?.questionId);
     }
-  }, [questions]);
+  }, []);
 
   if (questions && questions.length > 0) {
     return (

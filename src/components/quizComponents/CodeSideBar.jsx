@@ -3,7 +3,7 @@ import useQuestionStore from "../../stores/questionStore.js";
 import { QuestionDetailAndMySubmissionType } from "../../types/questions/questions-type";
 import { CONST_SUBMISSIONS } from "../../types/submissions/submissions-type";
 import { isObjectEmpty } from "../../utils/object-helper";
-import EditorWrapper from "../monaco_test/layout/EditorLayout";
+import EditorWrapper from "../../features/questions/layout/EditorLayout.jsx";
 import Solution from "./Solution";
 
 /**
