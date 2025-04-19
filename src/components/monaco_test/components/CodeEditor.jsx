@@ -15,8 +15,9 @@ var CodeEditorPropTypes;
  * @param {CodeEditorPropTypes} prop
  * @returns
  */
-export default function CodeEditor({ code, hdlEdit }) {
+export default function CodeEditor({ code, hdlEdit, defaultValue = "" }) {
   const editorRef = useRef(null);
+
   function handleEditorDidMount(editor) {
     editorRef.current = editor;
   }
@@ -31,6 +32,7 @@ export default function CodeEditor({ code, hdlEdit }) {
         value={code}
         onMount={handleEditorDidMount}
         onChange={hdlEdit}
+        defaultValue={defaultValue}
       />
     </div>
   );
