@@ -5,6 +5,7 @@ const useCategoriesStore = create((set) => ({
   categories: [],
   quizzes: [],
   challenges: [],
+  category: null,
   actionGetCategories: async () => {
     const result = await categoiesApi.getCategories();
     set({ categories: result.data.data });
@@ -26,6 +27,9 @@ const useCategoriesStore = create((set) => ({
     } catch (error) {
       console.log(error);
     }
+  },
+  setCategory: (category) => {
+    set({ category: category });
   },
 }));
 

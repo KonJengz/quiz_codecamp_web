@@ -4,7 +4,7 @@ import { useEffect } from "react";
 /**
  *
  * @param {Function} asyncFunc
- * @returns {Object} data
+ * @returns {Promise<Object>} data
  * @returns {Boolean} isLoading
  * @returns {Error | any} error
  */
