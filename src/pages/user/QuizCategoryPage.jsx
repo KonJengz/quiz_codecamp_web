@@ -104,11 +104,15 @@ function QuizCategoryPage() {
   const navigate = useNavigate();
 
   const hdlClick = useCallback((id) => {
-    navigate(`/quiz/${id}`);
+    if (pathname === "/challenge") {
+      navigate(`/challenge/${id}`);
+    }
+    if (pathname === "/") {
+      navigate(`/quiz/${id}`);
+    }
   }, []);
 
   const { pathname } = useLocation();
-  console.log("pathname", pathname);
 
   useEffect(() => {
     const fetchCategories = async () => {

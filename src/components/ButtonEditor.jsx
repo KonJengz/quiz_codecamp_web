@@ -1,5 +1,5 @@
 const btnMap = {
-  active: "bg-gradient-to-bl from-pink-q to-blue-q",
+  active: "bg-gradient-to-bl from-pink-q to-blue-q border border-pink-q",
   cancel: "border border-pink-q",
 };
 

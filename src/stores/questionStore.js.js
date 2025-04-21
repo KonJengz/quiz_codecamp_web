@@ -1,10 +1,14 @@
-import { act } from "react";
 import questionApi from "../api/questionApi";
 import { create } from "zustand";
 
 const useQuestionStore = create((set) => ({
   questions: [],
   question: null,
+  actionGetQuestions: async () => {
+    const result = await questionApi.getQuestions();
+    set({ questions: result.data.data });
+    return result.data.data;
+  },
   actionGetQuestionsByCategoryId: async (categoryId) => {
     const result = await questionApi.getQuestionsByCategoryId(categoryId);
     set({ questions: result.data.data });

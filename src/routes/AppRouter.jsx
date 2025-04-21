@@ -15,6 +15,8 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import AdminLayout from "../layouts/AdminLayout";
+import QuizAdmin from "../pages/admin/QuizAdmin";
+import Desktop12 from "../template/Desktop12";
 
 const guestRouter = createBrowserRouter([
   { path: "/", element: <LoginPage /> },
@@ -23,10 +25,6 @@ const guestRouter = createBrowserRouter([
 ]);
 
 const userRouter = createBrowserRouter([
-  { path: "/login", element: <LoginPage /> },
-  { path: "/quize", element: <ModalCreateQuiz /> },
-  { path: "/dashBoard", element: <DashBoard /> },
-
   {
     path: "/",
     element: <App />,
@@ -53,8 +51,10 @@ const adminRouter = createBrowserRouter([
         index: true,
         element: <DashBoard />,
       },
-      { path: "/quiz", element: <DashBoard /> },
+      { path: "/quiz", element: <QuizAdmin /> },
       { path: "/challenge", element: <DashBoard /> },
+      { path: "/quize2", element: <ModalCreateQuiz /> },
+      { path: "/quize3", element: <Desktop12 /> },
       { path: "*", element: <Navigate to="/" /> },
     ],
   },

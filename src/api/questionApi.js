@@ -12,4 +12,8 @@ questionApi.createQuestion = async (body) => {
   return axios.post("/questions", body);
 };
 
+questionApi.getQuestions = async () => {
+  return axios.get("/questions");
+};
+
 export default questionApi;
