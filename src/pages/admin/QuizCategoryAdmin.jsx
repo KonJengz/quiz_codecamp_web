@@ -1,26 +1,51 @@
-import { PencilLine } from "lucide-react";
+import { useState } from "react";
+import useCategoriesStore from "../../stores/categoriesStore";
+import { createCategorySchema } from "../../utils/validator";
+import CreateCategory from "./components/CreateCategory";
+import { ModalCreate } from "./components/ModalCreate";
+import QuizCategoryAdminItem from "./components/QuizCategoryAdminItem";
 
-function QuizCategoryAdmin({ categories }) {
+function QuizCategoryAdmin() {
+  const [editCategory, setEditCategory] = useState(null);
+  const categories = useCategoriesStore((state) => state.categories);
+  const { actionEditCategoryById } = useCategoriesStore();
+
+  console.log("editCategory", editCategory);
+
+  const hdlApi = (input) => {
+    createCategorySchema.parse(input);
+    if (editCategory === null) return;
+    actionEditCategoryById(editCategory.id, {
+      ...input,
+      categoryId: editCategory.id,
+    });
+  };
+
+  const hdlEditCategory = (categoryEdit) => {
+    setEditCategory(categoryEdit);
+  };
+
   return (
-    <div>
-      <div className="grid grid-cols-5 gap-4">
+    <>
+      <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-4 xl:grid-cols-4 xl:gap-4 2xl:grid-cols-5 2xl:gap-4 gap-4">
         {categories?.map((category) => (
-          <div
+          <QuizCategoryAdminItem
             key={category.id}
-            className="flex flex-col items-center gap-2 p-8 rounded-2xl bg-white text-black text-center"
-          >
-            <h1>
-              {category.name} ({category.questions?.length})
-            </h1>
-
-            <button className="flex gap-1 items-center text-gray-q-2 hover:text-gray-q-2/70 cursor-pointer">
-              <PencilLine strokeWidth={1.5} width={20} height={20} />
-              <span>Edit</span>
-            </button>
-          </div>
+            category={category}
+            hdlEditCategory={hdlEditCategory}
+          />
         ))}
       </div>
-    </div>
+
+      <ModalCreate idModal={"edit"}>
+        <CreateCategory
+          idModal={"edit"}
+          text={"Edit Category"}
+          hdlApi={hdlApi}
+          categoryEdit={editCategory}
+        />
+      </ModalCreate>
+    </>
   );
 }
 export default QuizCategoryAdmin;

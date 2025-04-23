@@ -1,7 +1,24 @@
-import { PencilLine } from "lucide-react";
-function QuizQuestionAdmin({ questions }) {
+import questionApi from "../../../api/questionApi";
+import useQuestionStore from "../../../stores/questionStore.js";
+import Toggle from "./Toggle";
+
+function QuizQuestionAdmin({ filterByCategory }) {
+  // console.log(questions);
+
+  const actionGetQuestions = useQuestionStore(
+    (state) => state.actionGetQuestions
+  );
+
+  const hdlClicktoggle = async (questionId) => {
+    try {
+      await questionApi.updateStatus(questionId);
+      await actionGetQuestions();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
-    <div className="p-4 bg-gray-q-1 rounded-3xl text-black">
+    <div className="p-4 bg-white rounded-3xl text-black">
       <table className="table">
         <thead>
           <tr className="flex items-center">
@@ -19,8 +36,8 @@ function QuizQuestionAdmin({ questions }) {
           </tr>
         </thead>
         <tbody className="text-purple-1">
-          {questions?.length > 0 &&
-            questions.map((question, index) => (
+          {filterByCategory?.length > 0 &&
+            filterByCategory.map((question, index) => (
               <tr
                 key={question.id}
                 className="hover:bg-base-300 flex items-center"
@@ -30,12 +47,10 @@ function QuizQuestionAdmin({ questions }) {
                 <td className="flex-8 text-center">
                   {question.category?.name}
                 </td>
-                <td className="flex-4 text-center">
-                  <input
-                    type="checkbox"
-                    // checked={!question.deletedAt}
-                    onChange={() => {}}
-                    className="toggle theme-controller border-gray-q-1 bg-gray-q-2/30 checked:border-pink-q checked:bg-gradient-to-bl from-pink-q to-blue-q outline-0 ring-0"
+                <td className="flex-4 flex justify-center">
+                  <Toggle
+                    isToggle={!question.deletedAt}
+                    hdlClicktoggle={() => hdlClicktoggle(question.id)}
                   />
                 </td>
                 <td className="flex-4">Edit</td>

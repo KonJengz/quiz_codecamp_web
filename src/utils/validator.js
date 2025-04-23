@@ -9,3 +9,7 @@ export const loginSchema = z.object({
     .min(6, "Password must be at least 6 characters")
     .nonempty("Password is required"),
 });
+
+export const createCategorySchema = z.object({
+  name: z.string().nonempty("Category is required"),
+});

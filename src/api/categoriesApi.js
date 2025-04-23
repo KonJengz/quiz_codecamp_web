@@ -2,8 +2,8 @@ import axios from "../config/axios";
 
 const categoiesApi = {};
 
-categoiesApi.getCategories = async () => {
-  return axios.get("/categories/me");
+categoiesApi.getCategories = async (status = "all", cha = false) => {
+  return axios.get(`/categories?s=${status}&cha=${cha}`);
 };
 
 categoiesApi.getCategoriesQuery = async (query) => {
@@ -19,7 +19,11 @@ categoiesApi.createCategory = async (body) => {
 };
 
 categoiesApi.updateCategory = async (id, body) => {
-  return axios.put(`/categories/${id}`, body);
+  return axios.patch(`/categories/${id}`, body);
+};
+
+categoiesApi.updateCategoryStatus = async (id) => {
+  return axios.patch(`/categories/${id}/status`);
 };
 
 export default categoiesApi;

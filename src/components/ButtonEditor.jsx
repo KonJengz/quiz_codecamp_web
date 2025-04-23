@@ -1,7 +1,8 @@
 import { LoaderCircle } from "lucide-react";
 
 const btnMap = {
-  active: "bg-gradient-to-bl from-pink-q to-blue-q border border-pink-q",
+  active:
+    "bg-gradient-to-bl from-pink-q to-blue-q border border-pink-q text-white",
   cancel: "border border-pink-q",
 };
 
