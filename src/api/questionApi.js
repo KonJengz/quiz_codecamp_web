@@ -20,4 +20,12 @@ questionApi.createQuestion = async (body) => {
   return axios.post("/questions", body);
 };
 
+questionApi.getQuestions = async (status = "all") => {
+  return axios.get(`/questions?s=${status}`);
+};
+
+questionApi.updateStatus = async (id) => {
+  return axios.patch(`/questions/${id}/status`);
+};
+
 export default questionApi;

@@ -104,7 +104,12 @@ function QuizCategoryPage() {
   const navigate = useNavigate();
 
   const hdlClick = useCallback((id) => {
-    navigate(`/quiz/${id}`);
+    if (pathname === "/challenge") {
+      navigate(`/challenge/${id}`);
+    }
+    if (pathname === "/") {
+      navigate(`/quiz/${id}`);
+    }
   }, []);
 
   const { pathname } = useLocation();
@@ -122,7 +127,7 @@ function QuizCategoryPage() {
   }, [pathname, actionGetCategoriesQuery]);
 
   return (
-    <div className="grid grid-cols-1 gap-4 p-8 justify-items-center sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8 xl:grid-cols-4 xl:gap-8 2xl:grid-cols-5 2xl:gap-12">
+    <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8 xl:grid-cols-4 xl:gap-8 2xl:grid-cols-5 2xl:gap-12 gap-4 p-8 justify-items-center ">
       {categories.length > 0 &&
         categories.map((item) => (
           <Card

@@ -1,9 +1,21 @@
-import { SubmissionsType } from "../submissions/submissions-type";
+import { CategoryType } from "../categories/categories-type";
 
 /**
- * @typedef
+ * @typedef {QuestionsDetailType[]}
  */
 export var QuestionListType;
+
+/**
+ * @typedef {{
+ *  id: string
+ *  title: string
+ *  category: CategoryType
+ *  createdAt: string
+ *  updatedAt: string
+ *  deletedAt :string
+ * }}
+ */
+export var QuestionsDetailType;
 
 /**
  * @typedef {

@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-export default function ModalCreateLearn({}) {
+export default function ModalCreateLearn() {
   return (
     <>
-      <dialog id="my_modal_2" className="modal ">
+      <dialog id="my_modal_3" className="modal ">
         <div className="modal-box bg-[#D9D9D9] text-black ">
           <div className="flex justify-between items-baseline gap-10">
             <div className="flex flex-col flex-1/2">
@@ -31,13 +31,11 @@ export default function ModalCreateLearn({}) {
               className="textarea textarea-primary"
             ></textarea>
           </div>
-
-          <div className="modal-action">
-            <form method="dialog">
-              <button className="btn">Close</button>
-            </form>
-          </div>
         </div>
+
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
       </dialog>
     </>
   );
