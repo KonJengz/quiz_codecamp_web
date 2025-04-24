@@ -49,7 +49,7 @@ export default function TestCaseInputItem({
         </div>
       )}
       <Button
-        className="w-full min-w-[75px] p-2 rounded-2xl  flex items-center rounded text-gray-400 bg-gray-300 max-w-2.5 cursor-pointer"
+        className="w-full min-w-[75px] p-2 rounded-2xl  flex items-center text-gray-400 bg-gray-300 max-w-2.5 cursor-pointer"
         icon={<Plus />}
         onClick={onClickAdd}
       >
