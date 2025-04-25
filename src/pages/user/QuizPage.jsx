@@ -15,10 +15,7 @@ function QuizPage() {
 
   const { question, questions, actionGetQuestionsAndMeByCategoryId } =
     useQuestionStore();
-  const { setCategory } = useCategoriesStore();
-
-  // Return the user back to main page if they
-  // get to this page directly
+  const { setCategory } = useCategoriesStore(); // Return the user back to main page if they // get to this page directly
   if (!categoryId || categoryId.length < 5) navigate("/");
 
   const useFetchQuestionByCatId = useCallback(async () => {

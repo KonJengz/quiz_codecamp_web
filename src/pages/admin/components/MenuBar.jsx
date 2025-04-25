@@ -1,16 +1,35 @@
 import { Plus } from "lucide-react";
 import MenuBaritem from "./MenuBaritem";
 import ButtonEditor from "../../../components/ButtonEditor";
+import useCategoriesStore from "../../../stores/categoriesStore";
+import { menuUIType } from "../QuizAdmin";
 
+/**
+ * @typedef {{
+ *  menu: menuUIType[]
+ *  handleSelectMenu: (menuId: number): void
+ *  selectMenu: number
+ *  btnCreate: menuUIType
+ *  handleClickCreate: (menuId: number): void
+ *  hdlSelectCategory: (categoryName: string): void
+ * }}
+ */
+var MenuBarPropTypes;
+
+/**
+ *
+ * @param {MenuBarPropTypes} param0
+ * @returns
+ */
 function MenuBar({
   menu,
   handleSelectMenu,
   selectMenu,
   btnCreate,
-  handleFilterByCategory,
-  categories,
   handleClickCreate,
+  hdlSelectCategory,
 }) {
+  const { categories } = useCategoriesStore();
   return (
     <>
       <nav className="flex justify-between items-center">
@@ -22,7 +41,7 @@ function MenuBar({
               label={item.label}
               id={item.id}
               selectMenu={selectMenu}
-              handleSelectMenu={handleSelectMenu}
+              handleSelectMenu={() => handleSelectMenu(item.id)}
               btn={selectMenu === item.id ? "active" : "cancel"}
             />
           ))}
@@ -31,7 +50,7 @@ function MenuBar({
             <>
               <div className="h-9 bg-white w-[1px]"></div>
               <select
-                onChange={(e) => handleFilterByCategory(e.target.value)}
+                onChange={(e) => hdlSelectCategory(e.target.value)}
                 defaultValue={""}
                 className="select text-wihite border-pink-q border bg-transparent rounded-2xl cursor-pointer"
               >
