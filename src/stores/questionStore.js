@@ -7,7 +7,7 @@ import {
 } from "./types/questionStore-type";
 
 export const INIT_CREATE_TESTCASE_QUESTION = {
-  input: [],
+  input: [""],
   expected: "",
   variable: "",
   matcher: TESTCASE_MATCHER.toBe,

@@ -1,9 +1,5 @@
-import useQuestionStore, {
-  INIT_CREATE_TESTCASE_QUESTION,
-} from "../../../../../stores/questionStore";
+import useQuestionStore from "../../../../../stores/questionStore";
 import TestCaseInputItem from "./TestCaseInputItem";
-import Button from "../../../../../components/Button";
-import { Plus } from "lucide-react";
 
 /**
  * @typedef {{
@@ -28,11 +24,20 @@ export default function CreateTestCase({ testCaseIndex }) {
     setCreateQuestionDetails([...testCases], "testCases");
   }
 
+  /**
+   * Function for adding more input for test case
+   */
   function hdlAddParameter() {
-    setCreateQuestionDetails(
-      [...testCases, INIT_CREATE_TESTCASE_QUESTION],
-      "testCases"
-    );
+    testCases[testCaseIndex].input.push("");
+    setCreateQuestionDetails([...testCases], "testCases");
+  }
+
+  /**
+   * Function for remove specific test case input
+   */
+  function hdlRemoveInput(index) {
+    testCases[testCaseIndex].input.splice(index, 1);
+    setCreateQuestionDetails([...testCases], "testCases");
   }
 
   return (
@@ -49,15 +54,10 @@ export default function CreateTestCase({ testCaseIndex }) {
             <TestCaseInputItem
               onChange={onChange}
               testCaseInput={testCase.input}
+              onClickAdd={hdlAddParameter}
+              hdlRemove={hdlRemoveInput}
             />
           )}
-          <Button
-            className="w-full min-w-[75px] p-2 rounded-2xl  flex items-center text-gray-400 bg-gray-300 max-w-2.5 cursor-pointer"
-            icon={<Plus />}
-            onClick={hdlAddParameter}
-          >
-            Add Argument
-          </Button>
         </h4>
       </div>
     </div>
