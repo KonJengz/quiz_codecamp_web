@@ -6,6 +6,14 @@ import {
   UseQuestionStoreReturnValueType,
 } from "./types/questionStore-type";
 
+export const INIT_CREATE_TESTCASE_QUESTION = {
+  input: [""],
+  expected: "",
+  variable: "",
+  matcher: TESTCASE_MATCHER.toBe,
+  not: false,
+};
+
 /**
  * @type {CreateQuestionDetailsType}
  */
@@ -17,15 +25,7 @@ export const INIT_CREATE_QUESTION_DETAILS = {
   solution: "",
   variableName: "",
   isFunction: true,
-  testCases: [
-    {
-      input: [],
-      expected: "",
-      variable: "",
-      matcher: TESTCASE_MATCHER.toBe,
-      not: false,
-    },
-  ],
+  testCases: [INIT_CREATE_TESTCASE_QUESTION],
 };
 
 /**
@@ -36,14 +36,27 @@ export const INIT_CREATE_QUESTION_DETAILS = {
 /**
  * @type {UseQuestionStore}
  */
-const useQuestionStore = create((set) => ({
+const useQuestionStore = create((set, get) => ({
   questions: [],
   /**
    * @property {CreateQuestionDetailsType} createQuestionDetails
    */
+  filterQuestions: [],
   createQuestionDetails: INIT_CREATE_QUESTION_DETAILS,
   isFetchNewQuestionsList: false,
   question: null,
+  setFilterQuestions(category = "") {
+    let questions = get().questions;
+
+    if (category) {
+      questions = questions?.filter(
+        // ใช้ questions
+        (question) => question?.category?.name === category
+      );
+    }
+
+    set({ filterQuestions: [...questions] });
+  },
   actionGetQuestions: async () => {
     const result = await questionApi.getQuestions();
     set({ questions: result.data.data });

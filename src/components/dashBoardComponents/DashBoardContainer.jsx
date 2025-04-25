@@ -1,7 +1,6 @@
-import { ArrowDownUp, MoveDown, MoveUp } from "lucide-react";
+import { MoveDown, MoveUp } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import useUserStore from "../../stores/userStore";
-import filter from "../../../node_modules/lodash-es/filter";
 import useCategoriesStore from "../../stores/categoriesStore";
 
 // const users = [
@@ -74,7 +73,7 @@ function DashBoardContainer() {
     const fetchData = async () => {
       try {
         const users = await actionGetUsers();
-        const students = filter(users, (user) => user.role === "STUDENT");
+        const students = users.filter((user) => user.role === "STUDENT");
         const sortedStudents = students.sort((a, b) =>
           a.username.localeCompare(b.username)
         );

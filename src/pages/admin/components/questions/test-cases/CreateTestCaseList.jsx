@@ -8,7 +8,7 @@ export default function CreateTestCaseList() {
     <div className="grid">
       {testCases.map((_, index) => (
         <CreateTestCase
-          key={Date.now()}
+          key={Date.now() + Math.random() + index}
           isFunction={isFunction}
           testCaseIndex={index}
         />

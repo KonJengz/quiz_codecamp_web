@@ -1,18 +1,30 @@
 import questionApi from "../../../api/questionApi";
 import useQuestionStore from "../../../stores/questionStore.js";
+import { QuestionListType } from "../../../types/questions/questions-type.js";
 import Toggle from "./Toggle";
+/**
+ * @typedef {{
+ *  filterByCategory: QuestionListType
+ * hdlFilterQuestionByCategory: Function(question: QuestionListType):void
+ * }}
+ */
+var QuizQuestionAdminPropType;
 
-function QuizQuestionAdmin({ filterByCategory }) {
+/**
+ *
+ * @param {QuizQuestionAdminPropType} param0
+ * @returns
+ */
+function QuizQuestionAdmin({}) {
   // console.log(questions);
-
-  const actionGetQuestions = useQuestionStore(
-    (state) => state.actionGetQuestions
-  );
+  const { filterQuestions, setFilterQuestions, actionGetQuestions } =
+    useQuestionStore();
 
   const hdlClicktoggle = async (questionId) => {
     try {
       await questionApi.updateStatus(questionId);
       await actionGetQuestions();
+      setFilterQuestions();
     } catch (error) {
       console.log(error);
     }
@@ -36,8 +48,8 @@ function QuizQuestionAdmin({ filterByCategory }) {
           </tr>
         </thead>
         <tbody className="text-purple-1">
-          {filterByCategory?.length > 0 &&
-            filterByCategory.map((question, index) => (
+          {filterQuestions?.length > 0 &&
+            filterQuestions.map((question, index) => (
               <tr
                 key={question.id}
                 className="hover:bg-base-300 flex items-center"

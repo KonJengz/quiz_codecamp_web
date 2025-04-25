@@ -1,5 +1,4 @@
 import useQuestionStore from "../../../../../stores/questionStore";
-import { CreateTestCaseType } from "../../../../../types/test-cases/test-cases-type";
 import TestCaseInputItem from "./TestCaseInputItem";
 
 /**
@@ -15,16 +14,31 @@ var CreateTeseCasePropType;
  * @returns
  */
 export default function CreateTestCase({ testCaseIndex }) {
-  const { createQuestionDetails, setCreateQuestionDetail } = useQuestionStore();
+  const { createQuestionDetails, setCreateQuestionDetails } =
+    useQuestionStore();
   const { testCases, isFunction } = createQuestionDetails;
   const testCase = testCases[testCaseIndex];
 
   function onChange(value, index) {
     testCase.input[index] = value;
-    setCreateQuestionDetail([...testCases], "testCases");
+    setCreateQuestionDetails([...testCases], "testCases");
   }
 
-  function hdlAddParameter() {}
+  /**
+   * Function for adding more input for test case
+   */
+  function hdlAddParameter() {
+    testCases[testCaseIndex].input.push("");
+    setCreateQuestionDetails([...testCases], "testCases");
+  }
+
+  /**
+   * Function for remove specific test case input
+   */
+  function hdlRemoveInput(index) {
+    testCases[testCaseIndex].input.splice(index, 1);
+    setCreateQuestionDetails([...testCases], "testCases");
+  }
 
   return (
     <div className="flex">
@@ -39,8 +53,9 @@ export default function CreateTestCase({ testCaseIndex }) {
           {isFunction && (
             <TestCaseInputItem
               onChange={onChange}
-              onClickAdd={hdlAddParameter}
               testCaseInput={testCase.input}
+              onClickAdd={hdlAddParameter}
+              hdlRemove={hdlRemoveInput}
             />
           )}
         </h4>

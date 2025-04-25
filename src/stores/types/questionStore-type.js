@@ -23,10 +23,12 @@ export var CreateQuestionDetailsType;
  *  questions: QuestionListType
  *  question: QuestionDetailAndMySubmissionType | QuestionsDetailType
  *  createQuestionDetails: CreateQuestionDetailsType
- *  actionGetQuestions: function():void
- *  actionGetQuestionsAndMeByCategoryId: function():void
- *  actionGetQuestionAndMySubmissionById: function():void
- *  setCreateQuestionDetail(input:any, field: keyof CreateQuestionDetailsType): void
+ *  filterQuestions: QuestionListType
+ *  setFilterQuestions: (category: string) => void
+ *  actionGetQuestions: () => Promise<void>
+ *  actionGetQuestionsAndMeByCategoryId: () => Promise<void>
+ *  actionGetQuestionAndMySubmissionById: () => Promise<void>
+ *  setCreateQuestionDetails :(input:any, field: keyof CreateQuestionDetailsType) => void
  * }}
  */
 export var UseQuestionStoreReturnValueType;

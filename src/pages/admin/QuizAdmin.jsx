@@ -11,6 +11,16 @@ import CreateCategory from "./components/CreateCategory.jsx";
 import CreateLearn from "./components/CreateLearn.jsx";
 import { createCategorySchema } from "../../utils/validator.js";
 
+/**
+ * @typedef {{
+ *  id: number
+ *  icon: React.ForwardRefExoticComponent
+ *  label: string
+ *  create: string
+ * }}
+ */
+export var menuUIType;
+
 const menu = [
   {
     id: 1,
@@ -33,48 +43,43 @@ const menu = [
 ];
 
 function QuizAdmin() {
-  const questions = useQuestionStore((state) => state.questions);
-  const actionGetQuestions = useQuestionStore(
-    (state) => state.actionGetQuestions
-  );
+  // GRAB the Questions state and fetch fn from store.
+  const { questions, setFilterQuestions, actionGetQuestions } =
+    useQuestionStore();
 
-  const { categories, actionCreateCategory, actionGetCategories } =
-    useCategoriesStore();
+  // GRAB the Categories state, create and fetch fn from store.
+  const { actionCreateCategory, actionGetCategories } = useCategoriesStore();
 
-  console.log("categories", categories);
-  console.log("questions", questions);
-
+  // Local state
   const [btnCreate, setBtnCreate] = useState(menu[0]);
   const [selectMenu, setSelectMenu] = useState(1);
-  const [filterByCategory, setFilterByCategory] = useState([]);
+  const [selectedCategoryName, setSelectedCategoryName] = useState("");
 
   const handleSelectMenu = (menuId) => {
-    const selectedMenu = menu.find((menuItem) => menuItem.id === menuId);
     setSelectMenu(menuId);
-    setBtnCreate(selectedMenu);
+    setBtnCreate(menu[menuId - 1]);
   };
 
-  const handleFilterByCategory = useCallback(
-    (category) => {
-      if (category === "") {
-        setFilterByCategory(questions); // ใช้ questions
-        return;
-      }
-      const result = questions?.filter(
-        // ใช้ questions
-        (question) => question?.category?.name === category
-      );
-      setFilterByCategory(result);
-    },
-    [questions]
-  );
+  /**
+   *
+   * @param {String} categoryName
+   * @returns void
+   */
+  function hdlSelectCategory(categoryName) {
+    setSelectedCategoryName(categoryName);
+    setFilterQuestions(categoryName);
+  }
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const result = await actionGetQuestions();
-        setFilterByCategory(result);
-        await actionGetCategories({ status: "all", cha: false });
+        // Fetch fn
+        await Promise.all([
+          actionGetQuestions(),
+          actionGetCategories({ status: "all", cha: false }),
+        ]);
+
+        setFilterQuestions(selectedCategoryName);
       } catch (error) {
         console.log("error", error);
       }
@@ -84,13 +89,7 @@ function QuizAdmin() {
   }, [actionGetCategories, actionGetQuestions]);
 
   const handleClickCreate = useCallback((menuId) => {
-    if (menuId === 1) {
-      document.getElementById("my_modal_1").showModal();
-    } else if (menuId === 2) {
-      document.getElementById("my_modal_2").showModal();
-    } else if (menuId === 3) {
-      document.getElementById("my_modal_3").showModal();
-    }
+    document.getElementById(`my_modal_${menuId}`).showModal();
   }, []);
 
   const hdlApi = (input) => {
@@ -103,16 +102,15 @@ function QuizAdmin() {
       <div className="px-8 py-4 space-y-4">
         <MenuBar
           handleClickCreate={handleClickCreate}
-          categories={categories}
           menu={menu}
           handleSelectMenu={handleSelectMenu}
           selectMenu={selectMenu}
           btnCreate={btnCreate}
-          handleFilterByCategory={handleFilterByCategory}
+          hdlSelectCategory={hdlSelectCategory}
         />
 
         {selectMenu === 1 ? (
-          <QuizQuestionAdmin filterByCategory={filterByCategory} />
+          <QuizQuestionAdmin />
         ) : selectMenu === 2 ? (
           <QuizCategoryAdmin />
         ) : null}

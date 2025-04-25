@@ -1,8 +1,4 @@
-// import { useState } from "react";
-
 function Toggle({ isToggle, hdlClicktoggle }) {
-  // const [isEditing, setIsEditing] = useState(false);
-
   return (
     <button
       onClick={hdlClicktoggle}

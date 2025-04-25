@@ -14,27 +14,22 @@ import useQuestionStore, {
 
 // For rendering Starter code and solution code
 // UI component which use the same Component
-const codeEditorUI = [
-  {
-    id: Date.now(),
-    name: "starterCode",
-    header: "Starter Code",
+function codeEditorUIFactory(name, header) {
+  return {
+    id: Date.now() + Math.random(),
+    name,
+    header,
     defaultCode: "/** Writing the Starter code here */",
     code: "",
     hdlEdit: function (input, setStateFn) {
       setStateFn(input);
     },
-  },
-  {
-    id: Date.now() + 1,
-    name: "solutionCode",
-    header: "Solution Code",
-    defaultCode: "/** Writing the Solution code here */",
-    code: "",
-    hdlEdit: function (input, setStateFn) {
-      setStateFn(input);
-    },
-  },
+  };
+}
+
+const codeEditorUI = [
+  codeEditorUIFactory("starterCode", "Starter Code"),
+  codeEditorUIFactory("solutionCode", "Solution Code"),
 ];
 
 function CreateQuestion() {
@@ -138,7 +133,7 @@ function CreateQuestion() {
         {/* <textarea
               type="text"
               placeholder="Enter Details Quiz"
-              
+
             ></textarea> */}
       </div>
       <div>
